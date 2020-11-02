@@ -11,7 +11,8 @@ struct zapis {
 // funkcija vraća dohvaćeni zapis
 struct zapis dohvati_brisi(FILE* direktna, int mbr) {
 	struct zapis z, z1;
-
+	fseek(direktna, sizeof(zapis) * mbr, SEEK_SET);
+	fread(&z, sizeof(zapis), 1, direktna);
 	return z;
 }
 
