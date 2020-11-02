@@ -6,7 +6,9 @@
 int zbroj(int *polje, int red, int stup)
 {
 	int zb = 0;
-	// Ovdje napisati kod
+	for (int i = 0; i < red; i++)
+		for (int j = 0; j < stup; j++)
+			zb += polje[i*MAXSTUP + j];
 	return zb;
 }
 

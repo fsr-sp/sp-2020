@@ -1,13 +1,16 @@
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 
 char *datum(char *jmbg) //DD.MM.GG.
-{
-	int d, m, g, c;
+{	
+	char c;
+	int d, m, g;
 	char *pom;
-	// Ovdje napisati kod
-	return NULL;
+	pom = (char *)malloc(10 * sizeof(char));
+	sscanf(jmbg, "%2d%2d%c%2d", &d, &m, &c, &g);
+	sprintf(pom, "%02d.%02d.%02d", d, m, g);
+	return pom;
 }
 
 int kontrola(char *jmbg)
