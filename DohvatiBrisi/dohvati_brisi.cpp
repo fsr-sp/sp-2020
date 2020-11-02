@@ -13,6 +13,9 @@ struct zapis dohvati_brisi(FILE* direktna, int mbr) {
 	struct zapis z, z1;
 	fseek(direktna, sizeof(zapis) * mbr, SEEK_SET);
 	fread(&z, sizeof(zapis), 1, direktna);
+	fseek(direktna, -long(sizeof(zapis)), SEEK_CUR);
+	z1.mbr = 0;
+	fwrite(&z1, sizeof(zapis), 1, direktna);
 	return z;
 }
 
@@ -59,6 +62,6 @@ int main() {
 		}
 	}
 
-	_getch();
+	getchar();
 	return 0;
 }
