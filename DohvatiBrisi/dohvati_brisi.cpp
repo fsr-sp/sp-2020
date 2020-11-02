@@ -10,8 +10,8 @@ struct zapis {
 
 // funkcija vraća dohvaćeni zapis
 struct zapis dohvati_brisi(FILE* direktna, int mbr) {
-	struct zapis z, z1;
-
+	struct zapis z;
+	z.mbr = 0;
 	return z;
 }
 
@@ -58,6 +58,6 @@ int main() {
 		}
 	}
 
-	_getch();
+	getchar();
 	return 0;
 }
