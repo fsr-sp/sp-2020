@@ -40,20 +40,33 @@ int prepisi(char *filenameIn, char *filenameOut) {
 //1. Zadatak
 zapis* Ucitaj(char *FileName, int *BrElem) {
 	int		i; //lokalne varijable
-	int	Br;
+	int	Br = 0;
 	FILE 	*fp;
 	zapis	*Polje = NULL;
 	zapis	Elem;
-
 	// Ovdje napisati kod
+	fp = fopen(FileName, "r");
+	if (fp == NULL)
+		return NULL;
+	fread(&Br, sizeof(int), 1, fp);
+	Polje = (zapis *)malloc(Br * sizeof(zapis));
+	for (int i = 0; i < Br; i++)
+		fread(&Polje[i], sizeof(zapis), 1, fp);
+	*BrElem = Br;
 	return Polje;
 }
 
 //2. Zadatak
 int	MaxPorez(zapis *Polje, int BrElem) {
-	int	i, MaxInd = -1;
+	int	i, MaxInd;
 	float Max;
-
+	Max = Polje[0].PlatitiPorez;
+	MaxInd = 0;
+	for (int i=1; i< BrElem; i++)
+		if (Polje[i].PlatitiPorez > Max) {
+			MaxInd = i;
+			Max = Polje[i].PlatitiPorez;
+		}
 	return MaxInd;
 }
 

@@ -1,4 +1,4 @@
-5
+6
 12345 Ivica Ivic
 100000 10000
 12346 Perica Peric
@@ -6,7 +6,9 @@
 12347 Marija Maric
 300000 15000
 12348 Ankica Anic
-250000 10000
+250000 100000
 12349 Stjepan Stipic
 500000 50000
+12349 Stjepan1 Stipic1
+500000 5000
 

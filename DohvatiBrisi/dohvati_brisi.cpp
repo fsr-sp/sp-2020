@@ -11,6 +11,11 @@ struct zapis {
 // funkcija vraća dohvaćeni zapis
 struct zapis dohvati_brisi(FILE* direktna, int mbr) {
 	struct zapis z, z1;
+	fseek(direktna, mbr * sizeof(struct zapis), SEEK_SET);
+	fread(&z, sizeof(struct zapis), 1, direktna);
+	z1.mbr = 0;
+	fseek(direktna, mbr * sizeof(struct zapis), SEEK_SET);
+	fwrite(&z1, sizeof(z1), 1, direktna);
 	return z;
 }
 
@@ -53,7 +58,6 @@ int main() {
 		}
 		else {
 			printf("\nNema zapisa s mbr = %d\n", mbr);
-			break;
 		}
 	}
 
