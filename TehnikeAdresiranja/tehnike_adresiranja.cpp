@@ -7,7 +7,7 @@
 //Struktura
 typedef struct {
 	int sifra;
-	char naziv[50 + 1];
+	char naziv[51 + 1];
 	float cijena;
 }zapis;
 
@@ -116,7 +116,17 @@ int print(FILE *f)
 
 int brojZapisa(FILE *f)
 {
-	return 0;
+	zapis pretinac[C];
+	int br = 0;
+	fseek(f, 0, SEEK_SET);
+	for (int i = 0; i < M; i++) {
+		fseek(f, i * BLOK, SEEK_SET);
+		fread(pretinac, sizeof(pretinac), 1, f);
+		for (int j = 0; j < C; j++) 
+			if (pretinac[j].sifra != 0)
+				br++;
+	}
+	return br;
 }
 
 int pronadji(FILE *f, int sifra) {
@@ -130,7 +140,15 @@ float gustoca(const char *ime_datoteke)
 
 void format(FILE *f)
 {
-
+	zapis pretinac[C];
+	for (int i = 0; i < M; i++) {
+		fseek(f, i * BLOK, SEEK_SET);
+		fread(pretinac, sizeof(pretinac), 1, f);
+		for (int j = 0; j < C; j++)
+			pretinac[j].sifra = 0;
+		fseek(f, i * BLOK, SEEK_SET);
+		fwrite(pretinac, sizeof(pretinac), 1, f);
+	}
 }
 
 // Tablica
@@ -160,7 +178,8 @@ int main()
 	parametri();
 	print(f);
 
-
+	format(f);
+	int br = brojZapisa(f);
 	zapis pom = { 10, "Naziv1", 34.4 };
 
 	_getch();
